@@ -1,0 +1,34 @@
+<xml>
+	<sequence>
+		<Generate name="GrandFather" template="C-99999" increment="1" start="100" />
+		<Generate name="Father" template="F-99999" increment="1" start="1000" />
+		<Generate name="Child" template="D-99999" increment="1" start="1000" />
+	</sequence>
+	<RowInputStructure>
+		<InputField name="GrandFatherName" type="" position="1" validation="" />
+		<InputField name="GrandFatherAge" type="" position="2" validation="" />
+		<InputField name="FatherName" type="" position="3" validation="" />
+		<InputField name="FatherAge" type="" position="4" validation="" />
+		<InputField name="ChildName" type="" position="5" validation="" />
+		<InputField name="ChildAge" type="" position="6" validation="" />
+	</RowInputStructure>
+	<OutputStructure>
+		<Table Name="GrandFather" PreSQL="INSERT INTO" PostSQL="">
+			<Field name="ID" type="string" value="GenerateSequence('GrandFather')" />
+			<Field name="Name" type="" value="GetInputField('GrandFatherName')" />
+			<Field name="Age" type="" value="GetInputField('GrandFatherAge')" />
+			<Table Name="Father" SQL="INSERT INTO">
+				<Field name="ID" type="string" value="GenerateSequence('Father')" />
+				<Field name="Name" type="" value="GetInputField('FatherName')" />
+				<Field name="Age" type="" value="GetInputField('FatherAge')" />
+				<Field name="ParentId" type="string" value="GetSequence('GrandFather')" />
+				<Table Name="Child" SQL="INSERT INTO">
+					<Field name="ID" type="string" value="GenerateSequence('Child')" />
+					<Field name="Name" type="" value="GetInputField('ChildName')" />
+					<Field name="Age" type="" value="GetInputField('ChildAge')" />
+					<Field name="ParentId" type="string" value="GetSequence('Father')" />
+				</Table>
+			</Table>
+		</Table>
+	</OutputStructure>
+</xml>

@@ -1,0 +1,35 @@
+<xml>
+	<sequence>
+		<Generate name="GrandFather" template="C-99999" increment="1" start="100" />
+		<Generate name="Father" template="F-99999" increment="1" start="1000" />
+		<Generate name="Child" template="D-99999" increment="1" start="1000" />
+	</sequence>
+	<RowInputStructure>
+		<InputField name="GrandFatherName" type="" position="0" validationExpr="" validate="0" />
+		<InputField name="GrandFatherAge" type="" position="1" validationExpr="" validate="0" />
+		<InputField name="FatherName" type="" position="2" validationExpr="" validate="0" />
+		<InputField name="FatherAge" type="" position="3" validationExpr="" validate="0" />
+		<InputField name="ChildName" type="" position="4" validationExpr="" validate="0" />
+		<InputField name="ChildAge" type="" position="5" validationExpr="" validate="0" />
+	</RowInputStructure>
+	<OutputStructure>
+		<Table name="GrandFather" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
+			<OutField name="ID" type="string" value="GenerateSequence('GrandFather')" />
+			<OutField name="Name" type="string" value="GetInputField('GrandFatherName')" />
+			<OutField name="Age" type="int" value="GetInputField('GrandFatherAge')" />
+			<Table name="Father" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
+				<OutField name="ID" type="string" value="GenerateSequence('Father')" />
+				<OutField name="Name" type="string" value="GetInputField('FatherName')" />
+				<OutField name="Age" type="int" value="GetInputField('FatherAge')" />
+				<OutField name="ParentId" type="string" value="GetSequence('GrandFather')" />
+				<Table name="Child" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="ID" type="string" value="GenerateSequence('Child')" />
+					<OutField name="Name" type="string" value="GetInputField('ChildName')" />
+					<OutField name="Age" type="int" value="GetInputField('ChildAge')" />
+					<OutField name="ParentId" type="string" value="GetSequence('Father')" />
+					<OutField name="GrandParentId" type="string" value="GetSequence('GrandFather')" />
+				</Table>
+			</Table>
+		</Table>
+	</OutputStructure>
+</xml>
