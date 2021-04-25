@@ -44,7 +44,7 @@ public class Root {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
+		try {
 		System.out.println("Start Loading Meta Structure Configuration");
 		MetaStructureManager.Load();
 		SequenceManager sequenceManager = new SequenceManager();
@@ -66,6 +66,10 @@ public class Root {
 		ProcessInputFile(args[0], sessionManager, rowInputFieldManager);
 		
 		outStructManager.Process(sessionManager, args[1]);
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 
 	}
 

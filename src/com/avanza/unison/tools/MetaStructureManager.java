@@ -1,6 +1,11 @@
 package com.avanza.unison.tools;
 
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 public final class MetaStructureManager {
 	
@@ -9,17 +14,9 @@ public final class MetaStructureManager {
     }
 
     
-	public static void Load()
+	public static void Load() throws ParserConfigurationException, SAXException, IOException
 	{
-		try {
-	
-			XPathManager.Load();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		
+		XPathManager.Load();
 	}
 	
 	public static NodeList LoadSequences()

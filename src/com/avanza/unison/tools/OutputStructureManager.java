@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.xml.xpath.XPathExpressionException;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -18,7 +20,7 @@ public class OutputStructureManager {
 	HashMap<String, Table> tableMap = new LinkedHashMap<String, Table>();
 	
 	
-	public void Load(NodeList nodeList)
+	public void Load(NodeList nodeList) throws XPathExpressionException
 	{
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			
