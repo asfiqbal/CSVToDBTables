@@ -4,5 +4,9 @@
 	<classpathentry kind="src" path="resource"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="D:/Work/CRM-OB/Tools/lib/poi-3.17.jar"/>
+	<classpathentry kind="lib" path="D:/Work/CRM-OB/Tools/lib/poi-ooxml-3.17.jar"/>
+	<classpathentry kind="lib" path="D:/Work/CRM-OB/Tools/lib/poi-ooxml-schemas-3.17.jar"/>
+	<classpathentry kind="lib" path="D:/Work/CRM-OB/Tools/lib/xmlbeans-2.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -17,8 +17,8 @@ public class AlphaNumSequenceGenrator implements  ISequenceGenerator {
 	
 	public String Generate() {
 		
-		int initialize = start.getStart();
-		int newSequence = initialize + start.getIncrement();
+		long initialize = start.getStart();
+		long newSequence = initialize + start.getIncrement();
 		start.setStart(newSequence);
 		String returnValue = String.format("%1$" + numericTemplate.length() + "s", newSequence).replace(' ', '0');
 		returnValue = start.getTemplate().replace(numericTemplate, returnValue);

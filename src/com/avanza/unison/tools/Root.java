@@ -51,21 +51,28 @@ public class Root {
 		System.out.println("Initiating SequenceGenerators");
 		sequenceManager.Load(MetaStructureManager.LoadSequences());
 		System.out.println("SequenceGenerators successfull initialized");
-		RowInputFieldManager rowInputFieldManager = new RowInputFieldManager();
-		System.out.println("Initializing Input fields");
-		rowInputFieldManager.Load(MetaStructureManager.LoadInputFields());
-		System.out.println("Input fields initialized Successfully");
-		OutputStructureManager outStructManager = new OutputStructureManager();
-		System.out.println("Loading Output Structure Configuration");
-		outStructManager.Load(MetaStructureManager.LoadOutputStructure());
-		System.out.println("Output Structure Configuration loaded Successfully");
-		System.out.println("Meta Structure Configuration Loaded Successfully");
 		
-		SessionManager sessionManager = new SessionManager(sequenceManager);
+		System.out.println("Initiating MetaNodes");
+		MetaNodeManager metaNodesManager = new MetaNodeManager();
+		metaNodesManager.Load(MetaStructureManager.LoadElement());
+		metaNodesManager.Traverse();
+		System.out.println("MetaNodes successfull initialized");
 		
-		ProcessInputFile(args[0], sessionManager, rowInputFieldManager);
-		
-		outStructManager.Process(sessionManager, args[1]);
+//		RowInputFieldManager rowInputFieldManager = new RowInputFieldManager();
+//		System.out.println("Initializing Input fields");
+//		rowInputFieldManager.Load(MetaStructureManager.LoadInputFields());
+//		System.out.println("Input fields initialized Successfully");
+//		OutputStructureManager outStructManager = new OutputStructureManager();
+//		System.out.println("Loading Output Structure Configuration");
+//		outStructManager.Load(MetaStructureManager.LoadOutputStructure());
+//		System.out.println("Output Structure Configuration loaded Successfully");
+//		System.out.println("Meta Structure Configuration Loaded Successfully");
+//		
+//		SessionManager sessionManager = new SessionManager(sequenceManager);
+//		
+//		ProcessInputFile(args[0], sessionManager, rowInputFieldManager);
+//		
+//		outStructManager.Process(sessionManager, args[1]);
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());

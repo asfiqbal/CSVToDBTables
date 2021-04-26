@@ -2,6 +2,10 @@ package com.avanza.unison.tools.objects;
 
 public class Sequence {
 	String name;
+	String template;
+	int increment;
+	long start;
+	
 	public String getName() {
 		return name;
 	}
@@ -20,16 +24,14 @@ public class Sequence {
 	public void setIncrement(String increment) {
 		this.increment = Integer.parseInt(increment);
 	}
-	public int getStart() {
+	public long getStart() {
 		return start;
 	}
 	public void setStart(String start) {
-		this.start = Integer.parseInt(start);
+		this.start = Long.parseLong(start);
 	}
-	public void setStart(int intStart) {
+	public void setStart(long intStart) {
 		this.start = intStart;
 	}
-	String template;
-	int increment;
-	int start;
+
 }

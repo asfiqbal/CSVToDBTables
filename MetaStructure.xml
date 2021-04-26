@@ -1,35 +1,68 @@
-<xml>
+<Unison>
 	<sequence>
-		<Generate name="GrandFather" template="C-99999" increment="1" start="100" />
-		<Generate name="Father" template="F-99999" increment="1" start="1000" />
-		<Generate name="Child" template="D-99999" increment="1" start="1000" />
+		<Generate name="MetaEntity" template="9999999999" increment="1" start="2201000149" />
+		<Generate name="MetaEntityAttribute" template="9999999999_99" increment="1" start="220100014901" />
 	</sequence>
-	<RowInputStructure>
-		<InputField name="GrandFatherName" type="" position="0" validationExpr="" validate="0" />
-		<InputField name="GrandFatherAge" type="" position="1" validationExpr="" validate="0" />
-		<InputField name="FatherName" type="" position="2" validationExpr="" validate="0" />
-		<InputField name="FatherAge" type="" position="3" validationExpr="" validate="0" />
-		<InputField name="ChildName" type="" position="4" validationExpr="" validate="0" />
-		<InputField name="ChildAge" type="" position="5" validationExpr="" validate="0" />
-	</RowInputStructure>
-	<OutputStructure>
-		<Table name="GrandFather" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
-			<OutField name="ID" type="string" value="GenerateSequence('GrandFather')" />
-			<OutField name="Name" type="string" value="GetInputField('GrandFatherName')" />
-			<OutField name="Age" type="int" value="GetInputField('GrandFatherAge')" />
-			<Table name="Father" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
-				<OutField name="ID" type="string" value="GenerateSequence('Father')" />
-				<OutField name="Name" type="string" value="GetInputField('FatherName')" />
-				<OutField name="Age" type="int" value="GetInputField('FatherAge')" />
-				<OutField name="ParentId" type="string" value="GetSequence('GrandFather')" />
-				<Table name="Child" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
-					<OutField name="ID" type="string" value="GenerateSequence('Child')" />
-					<OutField name="Name" type="string" value="GetInputField('ChildName')" />
-					<OutField name="Age" type="int" value="GetInputField('ChildAge')" />
-					<OutField name="ParentId" type="string" value="GetSequence('Father')" />
-					<OutField name="GrandParentId" type="string" value="GetSequence('GrandFather')" />
-				</Table>
+	<MetaNode name="MetaEntity">
+		<RowInputStructure>
+			<InputField name="Id" type="string" position="0" validationExpr="" validate="0" />
+			<InputField name="SystemName" type="string" position="0" validationExpr="" validate="0" />
+			<InputField name="ParentEntityId" type="string" position="1" validationExpr="" validate="0" />
+			<InputField name="EntityUserFriendlyName" type="string" position="2" validationExpr="" validate="0" />
+			<InputField name="TableName" type="string" position="3" validationExpr="" validate="0" />
+			<InputField name="MajorType" type="string" position="4" validationExpr="" validate="0" />
+		</RowInputStructure>
+		<OutputStructure>
+			<Table name="META_ENTITY" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
+				<OutField name="META_ENTITY_ID" type="string" value="GetInputField('Id')" />
+				<OutField name="SYSTEM_NAME" type="string" value="GetInputField('SystemName')" />
+				<OutField name="PARENT_ENTITY" type="int" value="GetInputField('ParentEntityId')" />
+				<OutField name="ENTITY_NAME" type="int" value="GetInputField('EntityUserFriendlyName')" />
+				<OutField name="TABLE_NAME" type="int" value="GetInputField('TableName')" />
+				<OutField name="IS_ABSTRACT" type="int" value="0" />
+				<OutField name="IS_SYSTEM" type="int" value="0" />
+				<OutField name="TEMPLATE_ENABLED" type="int" value="0" />
+				<OutField name="MAJOR_TYPE" type="int" value="GetInputField('MajorType')" />
+				<OutField name="DESCRIPTION" type="int" value="GetInputField('EntityUserFriendlyName')" />
+				<OutField name="META_ENT_NAME_PRM" type="int" value="GetInputField('EntityUserFriendlyName')" />
+				<OutField name="META_ENT_NAME_SEC" type="int" value="GetInputField('EntityUserFriendlyName')" />
+				<OutField name="DISCRIMINATOR_VALUE" type="int" value="GetInputField('Id')" />
+				<OutField name="CACHE_TIME" type="int" value="0" />
 			</Table>
-		</Table>
-	</OutputStructure>
-</xml>
+		</OutputStructure>
+		<MetaNode name="Attrib">
+			<RowInputStructure>
+				<InputField name="Id" type="string" position="0" validationExpr="" validate="0" />
+				<InputField name="SystemName" type="string" position="1" validationExpr="" validate="0" />
+				<InputField name="EntityId" type="string" position="2" validationExpr="" validate="0" />
+				<InputField name="AttributeName" type="string" position="3" validationExpr="" validate="0" />
+				<InputField name="TableColumn" type="string" position="4" validationExpr="" validate="0" />
+				<InputField name="AttributeType" type="string" position="5" validationExpr="" validate="0" />
+				<InputField name="IsMandatory" type="string" position="6" validationExpr="" validate="0" />
+				<InputField name="TemplateEnabled" type="string" position="7" validationExpr="" validate="0" />
+			</RowInputStructure>
+			<OutputStructure>
+				<Table name="META_ENTITY_ATTRIB" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="ATTRIBUTE_ID" type="string" value="GetInputField('Id')" />
+					<OutField name="SYSTEM_NAME" type="string" value="GetInputField('SystemName')" />
+					<OutField name="META_ENT_ID" type="string" value="GetInputField('EntityId')" />
+					<OutField name="ATTRIBUTE_NAME" type="string" value="GetInputField('AttributeName')" />
+					<OutField name="TABLE_COLUMN" type="string" value="GetInputField('TableColumn')" />
+					<OutField name="ATTRIBUTE_TYPE" type="string" value="String" />
+					<OutField name="IS_MANDATORY" type="string" value="GetInputField('IsMandatory')" />
+					<OutField name="IS_SEARCH" type="string" value="0" />
+					<OutField name="IS_AUDIT" type="string" value="0" />
+					<OutField name="IS_SUMMARY" type="string" value="0" />
+					<OutField name="IS_INTERNAL_PRIMARY" type="string" value="0" />
+					<OutField name="IS_PRIMARY" type="string" value="0" />
+					<OutField name="TEMPLATE_ENABLED" type="string" value="GetInputField('TemplateEnabled')" />
+					<OutField name="ATTRIBUTE_SCOPE" type="string" value="None" />
+					<OutField name="DEFAULT_EXP" type="string" value="''" />
+					<OutField name="OPERATOR_TYPE" type="string" value="Like" />
+					<OutField name="IS_SERIALIZED" type="string" value="0" />
+				</Table>
+			</OutputStructure>
+		</MetaNode>
+	</MetaNode>
+	
+</Unison>
