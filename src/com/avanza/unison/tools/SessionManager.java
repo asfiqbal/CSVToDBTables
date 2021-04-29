@@ -5,6 +5,8 @@ import java.util.LinkedList;
 
 public class SessionManager {
 	
+	UnisonConfigurationManager unisonConfigManager = null;
+	
 	LinkedList<HashMap<String, String>> listMap = new LinkedList<HashMap<String, String>>();
 	SequenceManager internalSeqManager = null;
 	
@@ -12,9 +14,15 @@ public class SessionManager {
 		return internalSeqManager;
 	}
 
-	public SessionManager(SequenceManager seqManager) {
+	public SessionManager(SequenceManager seqManager, UnisonConfigurationManager configManager) {
 		internalSeqManager = seqManager;
+		unisonConfigManager = configManager;
 	}
+	
+	public UnisonConfigurationManager getUnisonConfigurationManager() {
+		return unisonConfigManager;
+	}
+	
 	
 	
 	public void Push(HashMap<String, String> tMap) {

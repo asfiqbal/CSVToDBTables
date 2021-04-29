@@ -35,22 +35,22 @@ public class RowInputFieldManager {
 
 	}
 	
-	public HashMap<String, String> Process(String[] fileRow) throws InvalidFormatException {
-		HashMap<String, String> tMap = new HashMap<String, String>();
-		for(Map.Entry<String, InputField> entry: inputFieldMap.entrySet()) {
-			String fieldName = entry.getKey();
-			InputField fieldObj = entry.getValue();
-			int pos = fieldObj.getPosition();
-			String columnValue = fileRow[pos];
-			int validate = fieldObj.getValidate();
-			if (validate == 1) {
-				String validateExpr = fieldObj.getValidationExpr();
-				if (!Util.Match(validateExpr, columnValue))
-					throw new InvalidFormatException();
-			}
-			tMap.put(fieldName, columnValue.trim());
-		}
-		return tMap;
-	}
+//	public HashMap<String, String> Process(HashMap<String, String> rowMap) throws InvalidFormatException {
+//		HashMap<String, String> tMap = new HashMap<String, String>();
+//		for(Map.Entry<String, InputField> entry: inputFieldMap.entrySet()) {
+//			String fieldName = entry.getKey();
+//			InputField fieldObj = entry.getValue();
+//			int pos = fieldObj.getPosition();
+//			String columnValue = fileRow[pos];
+//			int validate = fieldObj.getValidate();
+//			if (validate == 1) {
+//				String validateExpr = fieldObj.getValidationExpr();
+//				if (!Util.Match(validateExpr, columnValue))
+//					throw new InvalidFormatException();
+//			}
+//			tMap.put(fieldName, columnValue.trim());
+//		}
+//		return tMap;
+//	}
 
 }

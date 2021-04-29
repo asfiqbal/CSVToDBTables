@@ -6,6 +6,10 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
 import com.avanza.unison.tools.objects.Command;
 
 public class Util {
@@ -75,4 +79,12 @@ public class Util {
 		return str;
 	}
 
+	public static String getXPathFromRoot(Element activeElement) {
+		Node parentNode = activeElement.getParentNode();
+		if (parentNode instanceof Document)
+			return "//" + activeElement.getTagName();
+		String outString = getXPathFromRoot((Element)parentNode);
+		outString = outString + "//" + activeElement.getTagName();
+		return outString;
+	}
 }

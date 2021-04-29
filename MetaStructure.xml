@@ -16,17 +16,17 @@
 			<Table name="META_ENTITY" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
 				<OutField name="META_ENTITY_ID" type="string" value="GetInputField('Id')" />
 				<OutField name="SYSTEM_NAME" type="string" value="GetInputField('SystemName')" />
-				<OutField name="PARENT_ENTITY" type="int" value="GetInputField('ParentEntityId')" />
-				<OutField name="ENTITY_NAME" type="int" value="GetInputField('EntityUserFriendlyName')" />
-				<OutField name="TABLE_NAME" type="int" value="GetInputField('TableName')" />
+				<OutField name="PARENT_ENTITY" type="string" value="GetInputField('ParentEntityId')" />
+				<OutField name="ENTITY_NAME" type="string" value="GetInputField('EntityUserFriendlyName')" />
+				<OutField name="TABLE_NAME" type="string" value="GetInputField('TableName')" />
 				<OutField name="IS_ABSTRACT" type="int" value="0" />
 				<OutField name="IS_SYSTEM" type="int" value="0" />
 				<OutField name="TEMPLATE_ENABLED" type="int" value="0" />
-				<OutField name="MAJOR_TYPE" type="int" value="GetInputField('MajorType')" />
-				<OutField name="DESCRIPTION" type="int" value="GetInputField('EntityUserFriendlyName')" />
-				<OutField name="META_ENT_NAME_PRM" type="int" value="GetInputField('EntityUserFriendlyName')" />
-				<OutField name="META_ENT_NAME_SEC" type="int" value="GetInputField('EntityUserFriendlyName')" />
-				<OutField name="DISCRIMINATOR_VALUE" type="int" value="GetInputField('Id')" />
+				<OutField name="MAJOR_TYPE" type="string" value="GetInputField('MajorType')" />
+				<OutField name="DESCRIPTION" type="string" value="GetInputField('EntityUserFriendlyName')" />
+				<OutField name="META_ENT_NAME_PRM" type="string" value="GetInputField('EntityUserFriendlyName')" />
+				<OutField name="META_ENT_NAME_SEC" type="string" value="GetInputField('EntityUserFriendlyName')" />
+				<OutField name="DISCRIMINATOR_VALUE" type="string" value="GetInputField('Id')" />
 				<OutField name="CACHE_TIME" type="int" value="0" />
 			</Table>
 		</OutputStructure>
@@ -63,6 +63,72 @@
 				</Table>
 			</OutputStructure>
 		</MetaNode>
+		<MetaNode name="View">
+			<RowInputStructure>
+				<InputField name="Id" type="string" position="0" validationExpr="" validate="0" />
+				<InputField name="SystemName" type="string" position="1" validationExpr="" validate="0" />
+				<InputField name="EntityId" type="string" position="2" validationExpr="" validate="0" />
+				<InputField name="ViewNamePrm" type="string" position="3" validationExpr="" validate="0" />
+				<InputField name="ViewType" type="string" position="4" validationExpr="" validate="0" />
+				<InputField name="Dimension" type="string" position="5" validationExpr="" validate="0" />
+				<InputField name="IsMain" type="string" position="6" validationExpr="" validate="0" />
+				<InputField name="IsDefault" type="string" position="7" validationExpr="" validate="0" />
+				<InputField name="SelectCriteria" type="string" position="7" validationExpr="" validate="0" />
+			</RowInputStructure>
+			<OutputStructure>
+				<Table name="META_VIEW" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="META_VIEW_ID" type="string" value="GetInputField('Id')" />
+					<OutField name="VIEW_NAME_PRM" type="string" value="GetInputField('ViewNamePrm')" />
+					<OutField name="SYSTEM_NAME" type="string" value="GetInputField('SystemName')" />
+					<OutField name="VIEW_NAME_SEC" type="string" value="GetInputField('ViewNamePrm')" />
+					<OutField name="VIEW_TYPE" type="string" value="GetInputField('ViewType')" />
+					<OutField name="META_ENT_ID" type="string" value="GetInputField('EntityId')" />
+					<OutField name="DIMENSION" type="string" value="GetInputField('Dimension')" />
+					<OutField name="IS_MAIN" type="string" value="GetInputField('IsMain')" />
+					<OutField name="IS_DEFAULT" type="string" value="GetInputField('IsDefault')" />
+					<OutField name="IS_READ_ONLY" type="int" value="0" />
+					<OutField name="IS_PRIMARY_LINK" type="int" value="1" />
+					<OutField name="DISPLAY_ORDER" type="int" value="1" />
+					<OutField name="SELECT_CRITERIA" type="string" value="NULL" />
+					<OutField name="PAGE_SIZE" type="int" value="0" />
+				</Table>
+			</OutputStructure>
+		</MetaNode>
+		<MetaNode name="MetaViewAttrib">
+			<RowInputStructure>
+				<InputField name="Id" type="string" position="0" validationExpr="" validate="0" />
+				<InputField name="SystemName" type="string" position="1" validationExpr="" validate="0" />
+				<InputField name="EntityId" type="string" position="2" validationExpr="" validate="0" />
+				<InputField name="MetaViewId" type="string" position="3" validationExpr="" validate="0" />
+				<InputField name="AttributeId" type="string" position="4" validationExpr="" validate="0" />
+				<InputField name="IsReadOnly" type="int" position="5" validationExpr="" validate="0" />
+				<InputField name="DisplayOrder" type="int" position="5" validationExpr="" validate="0" />
+				<InputField name="IsAggregated" type="int" position="6" validationExpr="" validate="0" />
+				<InputField name="ComponentType" type="string" position="7" validationExpr="" validate="0" />
+				<InputField name="DisplayNamePrm" type="string" position="7" validationExpr="" validate="0" />
+				<InputField name="DisplayNameSec" type="string" position="7" validationExpr="" validate="0" />
+				<InputField name="IsForeignValDisplay" type="int" position="7" validationExpr="" validate="0" />
+				<InputField name="IsPostBack" type="int" position="7" validationExpr="" validate="0" />
+				<InputField name="RenderAsPopup" type="int" position="7" validationExpr="" validate="0" />
+			</RowInputStructure>
+			<OutputStructure>
+				<Table name="META_VIEW_ATTRIB" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="VIEW_ATTRIB_ID" type="string" value="GetInputField('Id')" />
+					<OutField name="META_VIEW_ID" type="string" value="GetInputField('MetaViewId')" />
+					<OutField name="ATTRIBUTE_ID" type="string" value="GetInputField('AttributeId')" />
+					<OutField name="SYSTEM_NAME" type="string" value="GetInputField('SystemName')" />
+					<OutField name="META_ENT_ID" type="string" value="GetInputField('EntityId')" />
+					<OutField name="IS_READ_ONLY" type="int" value="0" />
+					<OutField name="DISPLAY_ORDER" type="int" value="GetInputField('DisplayOrder')" />
+					<OutField name="COMPONENT_TYPE" type="string" value="GetInputField('ComponentType')" />
+					<OutField name="IS_AGGREGATED" type="int" value="0" />
+					<OutField name="DISPLAY_NAME_PRM" type="string" value="GetInputField('DisplayNamePrm')" />
+					<OutField name="DISPLAY_NAME_SEC" type="string" value="GetInputField('DisplayNamePrm')" />
+					<OutField name="IS_FOREIGN_VAL_DISPLAY" type="int" value="0" />
+					<OutField name="IS_POST_BACK" type="int" value="0" />
+					<OutField name="RENDER_AS_POPUP" type="int" value="0" />
+				</Table>
+			</OutputStructure>
+		</MetaNode>		
 	</MetaNode>
-	
 </Unison>

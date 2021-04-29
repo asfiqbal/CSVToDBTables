@@ -43,6 +43,7 @@ public class TableManager {
 		StringBuilder sb = new StringBuilder();
 		sb.append(outSql);
 		sb.append(table.getPostSQL());
+		sb.append("\n");
 
 		for (Map.Entry<String, Table> me : outInnerTableMap.entrySet()) {
 			Table t = (Table)me.getValue();
