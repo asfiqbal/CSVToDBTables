@@ -58,19 +58,7 @@ public class MetaNodeManager {
 	public void Process(SessionManager inSessionManager, String inFileName) throws InvalidFormatException, XPathExpressionException {
 		HashMap<String, String> dataMap = null;
 		ArrayList<String> sqlSet = new ArrayList<String>();
-//		TableManager tableManager = new TableManager();
-		
-//		while ((dataMap = sessionManager.Pop()) != null) {
-//
-//			for(Map.Entry<String, Table> entry: tableMap.entrySet()) {
-//
-//				Table tableObj = entry.getValue();
-//				String sql = tableManager.Process(tableObj, dataMap, sessionManager.getInternalSeqManager());
-//				sqlSet.add(sql);
-//			}
-//			sqlSet.add("\n");
-//		}
-		
+	
 		for(Map.Entry<String, MetaNode> entry: metaNodeMap.entrySet()) {
 
 			MetaNode metaNode = entry.getValue();

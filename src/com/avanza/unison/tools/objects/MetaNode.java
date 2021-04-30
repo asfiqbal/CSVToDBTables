@@ -105,11 +105,7 @@ public class MetaNode {
 		String outString = "";
 		String XpathExpression ="";
 		StringBuilder sqlStringBuilder = new StringBuilder();
-//		for (Map.Entry<String, InputField> me : InputFieldMap.entrySet()) {
-//			InputField field = (InputField)me.getValue();
-//			System.out.println("Name: "+field.getName()+", Type: "+field.getType()+", Position: "+field.getPosition());
-//	    }
-//		
+
 		UnisonConfigurationManager unisonConfigReader = inSessionManager.getUnisonConfigurationManager();
 		
 		if (parentNode == null) {

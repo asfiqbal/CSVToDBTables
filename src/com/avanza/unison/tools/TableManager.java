@@ -21,8 +21,7 @@ public class TableManager {
 		
 		List<String> columnNames = new ArrayList<String>();
 		List<String> values = new ArrayList<String>();
-		//CommandManager commandManager = new CommandManager();
-						
+					
 		for (Map.Entry<String, OutField> me : outFieldMap.entrySet()) {
 			OutField field = (OutField)me.getValue();
 			columnNames.add(field.getName());

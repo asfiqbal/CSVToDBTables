@@ -57,5 +57,19 @@
 		<MetaViewAttrib Id="2201000149_25" SystemName="InvestmentRealEstate_AmountTranch_3" EntityId="2201000149" MetaViewId="'2201000149_002" AttributeId="2201000149_25"  DisplayOrder="24" ComponentType="TextBox" DisplayNamePrm="Amount Tranch-3" />
 		<MetaViewAttrib Id="2201000149_26" SystemName="InvestmentRealEstate_AmountTranch_4" EntityId="2201000149" MetaViewId="'2201000149_002" AttributeId="2201000149_26"  DisplayOrder="26" ComponentType="TextBox" DisplayNamePrm="Amount Tranch-4" />
 		<MetaViewAttrib Id="2201000149_27" SystemName="InvestmentRealEstate_Frequency" EntityId="2201000149" MetaViewId="'2201000149_002" AttributeId="2201000149_27"  DisplayOrder="8" ComponentType="TextBox" DisplayNamePrm="Frequency" />
+		<MetaViewRelationship Id="2201000149_01" ParentViewId="2201000149_001" ChildViewId="2201000149_002" ChildOrderInParent="3" RelationshipType="CONTAINMENT" />
+		<MetaViewRelationship Id="2201000149_02" ParentViewId="2201000149_001" ChildViewId="2000000155" ChildOrderInParent="2" RelationshipType="CONTAINMENT" />
+		<MetaViewRelationship Id="2201000149_03" ParentViewId="2201000149_001" ChildViewId="2000000156" ChildOrderInParent="4" RelationshipType="CONTAINMENT" />
+		<MetaViewRelationship Id="2201000149_04" ParentViewId="2201000149_001" ChildViewId="2000000157" ChildOrderInParent="1" RelationshipType="CONTAINMENT" />
+		<MetaViewRelationship Id="2201000149_05" ParentViewId="2201000149_001" ChildViewId="2000000158" ChildOrderInParent="5" RelationshipType="CONTAINMENT" />
+		<MetaViewRelationship Id="2201000149_06" ParentViewId="2201000149_001" ChildViewId="2000000159" ChildOrderInParent="6" RelationshipType="CONTAINMENT" />
+		<MetaEntityRelationship Id="2000201" SystemName="EForm.InvestmentForm.Workflow" SubEntityId="2000000150" MainEntityId="2201000149" RelationType="DIRECT" MainEntityKey="EFORM_TICKET_NUM" SubEntityKey="REF_DOC_NUM"/>
+		<MetaViewParam ParameterName="sectionColStyleClass2" MetaViewId="2201000149_002" ParameterValue="section_column_4" />
+		<ValueTreeNode Id="2000000200" SystemName="RoshanAccounts" ProductEntId="0000000003" RootNode="2000000011" ParentNode="2000000011" OtherCode="RA" TreeNodeNamePrm="Roshan Accounts" HierarchyLevel="1" GroupId="EFORM_PRODUCT" DisplayOrder="4" />
+		<MetaEntityCategory Id="2201000149_201" EntityId="2201000149" TreeNodeId="2000000200" />
+		<WFProcessEntityAlloc Id="200201" DocumentEntity="2201000149" ProcessCode="2000000200" TurnAroundTime="5760" EscStrategyId="0000000001"/>
+		<WFProcessParticipent RoleId="0000000001" ProcessAllocId="200201" IsSupervisor="1" SelectCriteria=" true" />
+		<WFProcessParticipent RoleId="0000000002" ProcessAllocId="200201" IsSupervisor="0" SelectCriteria=" false" />
+		<ADCFacilityEFormTypeMapping Id="312" ADCCode="05" EntityId="2201000149" />
 	</MetaEntity>
 </UnisonConfiguration>
