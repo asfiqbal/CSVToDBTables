@@ -54,6 +54,7 @@ public class Root {
 
 			System.out.println("Initiating MetaNodes");
 			MetaNodeManager metaNodesManager = new MetaNodeManager();
+			metaNodesManager.LoadRoot(MetaStructureManager.LoadUnisonNode());
 			metaNodesManager.Load(MetaStructureManager.LoadElement());
 			//metaNodesManager.Traverse();
 			System.out.println("MetaNodes successfull initialized");
@@ -61,6 +62,7 @@ public class Root {
 			System.out.println("Reading "+args[0]+ "File");
 			UnisonConfigurationManager configReader = new UnisonConfigurationManager(args[0]);
 			SessionManager sessionManager = new SessionManager(sequenceManager, configReader);
+			sessionManager.GenerateIds();
 			String outFileName = args[1];
 
 			System.out.println("Initiating SQL Generation Process ");

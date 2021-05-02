@@ -23,14 +23,32 @@ public class MetaNodeManager {
 	
 	HashMap<String, MetaNode> metaNodeMap = new LinkedHashMap<String, MetaNode>();
 	
+	String unisonVersion;
+	String root;
+	
+	public String getUnisonVersion() {
+		return unisonVersion;
+	}
+
+	public void setUnisonVersion(String unisonVersion) {
+		this.unisonVersion = unisonVersion;
+	}
+
+	public String getRoot() {
+		return root;
+	}
+
+	public void setRoot(String root) {
+		this.root = root;
+	}
+
+
 	public MetaNodeManager() {
 	}
 	
-	
-	
-	
 	public void Load(NodeList nodeList) throws XPathExpressionException
 	{
+		
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			
 			Node node = nodeList.item(i);
@@ -69,6 +87,13 @@ public class MetaNodeManager {
 		System.out.println("Writing Generated SQL to " + inFileName + " File.");
 		FileManager.WriteListToFile(sqlSet, inFileName);
 
+	}
+
+	public void LoadRoot(Node loadUnisonNode) {
+		
+		Element element = (Element)loadUnisonNode;
+		root = element.getAttribute("root");
+		unisonVersion = element.getAttribute("version");
 	}
 
 

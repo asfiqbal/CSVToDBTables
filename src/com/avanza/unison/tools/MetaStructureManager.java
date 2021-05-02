@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -32,6 +33,22 @@ public final class MetaStructureManager {
 			e.printStackTrace();
 		}
 		return nodeList;
+		
+	}
+	
+	public static Node LoadUnisonNode()
+	{
+		NodeList nodeList = null;
+		try {
+	
+			String expression = "/Unison";
+			nodeList = XPathManager.Evaluate(expression);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return nodeList.item(0);
 		
 	}
 	

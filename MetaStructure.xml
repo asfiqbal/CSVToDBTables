@@ -1,11 +1,20 @@
-<Unison>
+<Unison root="Unison.Document.EForm" version="2.8">
 	<sequence>
-		<Generate name="MetaEntity" template="9999999999" increment="1" start="2201000149" />
-		<Generate name="MetaEntityAttribute" template="9999999999_99" increment="1" start="220100014901" />
+		<Generate name="MetaEntity" template="E-9999999999" increment="1" start="2201000149" />
+		<Generate name="Attrib" template="A-999999999999" increment="1" start="220100014901" />
+		<Generate name="View" template="V-999999999999" increment="1" start="220100014901" />
+		<Generate name="MetaViewAttrib" template="VA-999999999999" increment="1" start="220100014901" />
+		<Generate name="MetaViewRelationship" template="VR-999999999999" increment="1" start="220100014901" />
+		<Generate name="MetaEntityRelationship" template="ER-999999999999" increment="1" start="220100014901" />
+		<Generate name="ValueTreeNode" template="T-999999999999" increment="1" start="220100014901" />
+		<Generate name="MetaEntityCategory" template="EC-999999999999" increment="1" start="220100014901" />
+		<Generate name="WFProcessEntityAlloc" template="PEA-999999999999" increment="1" start="220100014901" />
+		<Generate name="ADCFacilityEFormTypeMapping" template="9999999" increment="1" start="220100014901" />
 	</sequence>
 	<MetaNode name="MetaEntity">
 		<RowInputStructure>
 			<InputField name="Id" type="string" position="0" validationExpr="" validate="0" />
+			<InputField name="InternalReferenceKey" type="string" position="0" validationExpr="" validate="0" />
 			<InputField name="SystemName" type="string" position="0" validationExpr="" validate="0" />
 			<InputField name="ParentEntityId" type="string" position="1" validationExpr="" validate="0" />
 			<InputField name="EntityUserFriendlyName" type="string" position="2" validationExpr="" validate="0" />
@@ -13,8 +22,8 @@
 			<InputField name="MajorType" type="string" position="4" validationExpr="" validate="0" />
 		</RowInputStructure>
 		<OutputStructure>
-			<Table name="META_ENTITY" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
-				<OutField name="META_ENTITY_ID" type="string" value="GetInputField('Id')" deleteKey="Yes" />
+			<Table name="META_ENTITY" insertSQL="INSERT INTO %s (%s) VALUES (%s) " deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+				<OutField name="META_ENTITY_ID" type="string" value="GetSequence('InternalReferenceKey')" deleteKey="Yes" />
 				<OutField name="SYSTEM_NAME" type="string" value="GetInputField('SystemName')" />
 				<OutField name="PARENT_ENTITY" type="string" value="GetInputField('ParentEntityId')" />
 				<OutField name="ENTITY_NAME" type="string" value="GetInputField('EntityUserFriendlyName')" />
@@ -26,13 +35,14 @@
 				<OutField name="DESCRIPTION" type="string" value="GetInputField('EntityUserFriendlyName')" />
 				<OutField name="META_ENT_NAME_PRM" type="string" value="GetInputField('EntityUserFriendlyName')" />
 				<OutField name="META_ENT_NAME_SEC" type="string" value="GetInputField('EntityUserFriendlyName')" />
-				<OutField name="DISCRIMINATOR_VALUE" type="string" value="GetInputField('Id')" />
+				<OutField name="DISCRIMINATOR_VALUE" type="string" value="GetSequence('InternalReferenceKey')" />
 				<OutField name="CACHE_TIME" type="int" value="0" />
 			</Table>
 		</OutputStructure>
 		<MetaNode name="Attrib">
 			<RowInputStructure>
 				<InputField name="Id" type="string" position="0" validationExpr="" validate="0" />
+				<InputField name="InternalReferenceKey" type="string" position="0" validationExpr="" validate="0" />
 				<InputField name="SystemName" type="string" position="1" validationExpr="" validate="0" />
 				<InputField name="EntityId" type="string" position="2" validationExpr="" validate="0" />
 				<InputField name="AttributeName" type="string" position="3" validationExpr="" validate="0" />
@@ -42,24 +52,24 @@
 				<InputField name="TemplateEnabled" type="string" position="7" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="META_ENTITY_ATTRIB" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
-					<OutField name="ATTRIBUTE_ID" type="string" value="GetInputField('Id')" deleteKey="Yes" />
+				<Table name="META_ENTITY_ATTRIB" insertSQL="INSERT INTO %s (%s) VALUES (%s) " deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="ATTRIBUTE_ID" type="string" value="GetSequence('InternalReferenceKey')" deleteKey="Yes" />
 					<OutField name="SYSTEM_NAME" type="string" value="GetInputField('SystemName')" />
-					<OutField name="META_ENT_ID" type="string" value="GetInputField('EntityId')" />
+					<OutField name="META_ENT_ID" type="string" value="GetSequence('EntityId')" />
 					<OutField name="ATTRIBUTE_NAME" type="string" value="GetInputField('AttributeName')" />
 					<OutField name="TABLE_COLUMN" type="string" value="GetInputField('TableColumn')" />
 					<OutField name="ATTRIBUTE_TYPE" type="string" value="String" />
 					<OutField name="IS_MANDATORY" type="string" value="GetInputField('IsMandatory')" />
-					<OutField name="IS_SEARCH" type="string" value="0" />
-					<OutField name="IS_AUDIT" type="string" value="0" />
-					<OutField name="IS_SUMMARY" type="string" value="0" />
-					<OutField name="IS_INTERNAL_PRIMARY" type="string" value="0" />
-					<OutField name="IS_PRIMARY" type="string" value="0" />
+					<OutField name="IS_SEARCH" type="int" value="0" />
+					<OutField name="IS_AUDIT" type="int" value="0" />
+					<OutField name="IS_SUMMARY" type="int" value="0" />
+					<OutField name="IS_INTERNAL_PRIMARY" type="int" value="0" />
+					<OutField name="IS_PRIMARY" type="int" value="0" />
 					<OutField name="TEMPLATE_ENABLED" type="string" value="GetInputField('TemplateEnabled')" />
 					<OutField name="ATTRIBUTE_SCOPE" type="string" value="None" />
 					<OutField name="DEFAULT_EXP" type="string" value="''" />
 					<OutField name="OPERATOR_TYPE" type="string" value="Like" />
-					<OutField name="IS_SERIALIZED" type="string" value="0" />
+					<OutField name="IS_SERIALIZED" type="int" value="0" />
 				</Table>
 			</OutputStructure>
 		</MetaNode>
@@ -67,6 +77,7 @@
 			<RowInputStructure>
 				<InputField name="Id" type="string" position="0" validationExpr="" validate="0" />
 				<InputField name="SystemName" type="string" position="1" validationExpr="" validate="0" />
+				<InputField name="InternalReferenceKey" type="string" position="0" validationExpr="" validate="0" />
 				<InputField name="EntityId" type="string" position="2" validationExpr="" validate="0" />
 				<InputField name="ViewNamePrm" type="string" position="3" validationExpr="" validate="0" />
 				<InputField name="ViewType" type="string" position="4" validationExpr="" validate="0" />
@@ -76,20 +87,20 @@
 				<InputField name="SelectCriteria" type="string" position="7" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="META_VIEW" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
-					<OutField name="META_VIEW_ID" type="string" value="GetInputField('Id')" deleteKey="Yes" />
+				<Table name="META_VIEW" insertSQL="INSERT INTO %s (%s) VALUES (%s) " deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="META_VIEW_ID" type="string" value="GetSequence('InternalReferenceKey')" deleteKey="Yes" />
 					<OutField name="VIEW_NAME_PRM" type="string" value="GetInputField('ViewNamePrm')" />
 					<OutField name="SYSTEM_NAME" type="string" value="GetInputField('SystemName')" />
 					<OutField name="VIEW_NAME_SEC" type="string" value="GetInputField('ViewNamePrm')" />
 					<OutField name="VIEW_TYPE" type="string" value="GetInputField('ViewType')" />
-					<OutField name="META_ENT_ID" type="string" value="GetInputField('EntityId')" />
+					<OutField name="META_ENT_ID" type="string" value="GetSequence('EntityId')" />
 					<OutField name="DIMENSION" type="string" value="GetInputField('Dimension')" />
 					<OutField name="IS_MAIN" type="string" value="GetInputField('IsMain')" />
 					<OutField name="IS_DEFAULT" type="string" value="GetInputField('IsDefault')" />
 					<OutField name="IS_READ_ONLY" type="int" value="0" />
 					<OutField name="IS_PRIMARY_LINK" type="int" value="1" />
 					<OutField name="DISPLAY_ORDER" type="int" value="1" />
-					<OutField name="SELECT_CRITERIA" type="string" value="NULL" />
+					<OutField name="SELECT_CRITERIA" type="int" value="NULL" />
 					<OutField name="PAGE_SIZE" type="int" value="0" />
 				</Table>
 			</OutputStructure>
@@ -98,6 +109,7 @@
 			<RowInputStructure>
 				<InputField name="Id" type="string" position="0" validationExpr="" validate="0" />
 				<InputField name="SystemName" type="string" position="1" validationExpr="" validate="0" />
+				<InputField name="InternalReferenceKey" type="string" position="0" validationExpr="" validate="0" />
 				<InputField name="EntityId" type="string" position="2" validationExpr="" validate="0" />
 				<InputField name="MetaViewId" type="string" position="3" validationExpr="" validate="0" />
 				<InputField name="AttributeId" type="string" position="4" validationExpr="" validate="0" />
@@ -112,12 +124,12 @@
 				<InputField name="RenderAsPopup" type="int" position="7" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="META_VIEW_ATTRIB" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
-					<OutField name="VIEW_ATTRIB_ID" type="string" value="GetInputField('Id')" deleteKey="Yes" />
-					<OutField name="META_VIEW_ID" type="string" value="GetInputField('MetaViewId')" />
-					<OutField name="ATTRIBUTE_ID" type="string" value="GetInputField('AttributeId')" />
+				<Table name="META_VIEW_ATTRIB" insertSQL="INSERT INTO %s (%s) VALUES (%s) " deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="VIEW_ATTRIB_ID" type="string" value="GetSequence('InternalReferenceKey')" deleteKey="Yes" />
+					<OutField name="META_VIEW_ID" type="string" value="GetSequence('MetaViewId')" />
+					<OutField name="ATTRIBUTE_ID" type="string" value="GetSequence('AttributeId')" />
 					<OutField name="SYSTEM_NAME" type="string" value="GetInputField('SystemName')" />
-					<OutField name="META_ENT_ID" type="string" value="GetInputField('EntityId')" />
+					<OutField name="META_ENT_ID" type="string" value="GetSequence('EntityId')" />
 					<OutField name="IS_READ_ONLY" type="int" value="0" />
 					<OutField name="DISPLAY_ORDER" type="int" value="GetInputField('DisplayOrder')" />
 					<OutField name="COMPONENT_TYPE" type="string" value="GetInputField('ComponentType')" />
@@ -133,16 +145,17 @@
 		<MetaNode name="MetaViewRelationship">
 			<RowInputStructure>
 				<InputField name="Id" type="string" position="0" validationExpr="" validate="0" />
+				<InputField name="InternalReferenceKey" type="string" position="0" validationExpr="" validate="0" />
 				<InputField name="ParentViewId" type="string" position="1" validationExpr="" validate="0" />
 				<InputField name="ChildViewId" type="string" position="2" validationExpr="" validate="0" />
 				<InputField name="ChildOrderInParent" type="int" position="3" validationExpr="" validate="0" />
 				<InputField name="RelationshipType" type="string" position="4" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="META_VIEW_RELATIONSHIP" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
-					<OutField name="RELATION_ID" type="string" value="GetInputField('Id')" deleteKey="Yes" />
-					<OutField name="PARENT_VIEW_ID" type="string" value="GetInputField('ParentViewId')" />
-					<OutField name="CHILD_VIEW_ID" type="string" value="GetInputField('ChildViewId')" />
+				<Table name="META_VIEW_RELATIONSHIP" insertSQL="INSERT INTO %s (%s) VALUES (%s) " deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="RELATION_ID" type="string" value="GetSequence('InternalReferenceKey')" deleteKey="Yes" />
+					<OutField name="PARENT_VIEW_ID" type="string" value="GetSequence('ParentViewId')" />
+					<OutField name="CHILD_VIEW_ID" type="string" value="GetSequence('ChildViewId')" />
 					<OutField name="CHILD_ORDER_IN_PARENT" type="int" value="GetInputField('ChildOrderInParent')" />
 					<OutField name="RELATION_TYPE" type="string" value="GetInputField('RelationshipType')" />
 				</Table>
@@ -152,6 +165,7 @@
 			<RowInputStructure>
 				<InputField name="Id" type="string" position="0" validationExpr="" validate="0" />
 				<InputField name="SystemName" type="string" position="1" validationExpr="" validate="0" />
+				<InputField name="InternalReferenceKey" type="string" position="0" validationExpr="" validate="0" />
 				<InputField name="SubEntityId" type="string" position="2" validationExpr="" validate="0" />
 				<InputField name="MainEntityId" type="int" position="3" validationExpr="" validate="0" />
 				<InputField name="RelationType" type="string" position="4" validationExpr="" validate="0" />
@@ -159,11 +173,11 @@
 				<InputField name="SubEntityKey" type="string" position="4" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="META_ENTITY_RELATIONSHIP" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" DeleteSQL = "DELETE FROM %s where %s" insertAuditField="1" auditUser="System">
-					<OutField name="RELATIONSHIP_ID" type="string" value="GetInputField('Id')" DeleteKey="Yes" />
+				<Table name="META_ENTITY_RELATIONSHIP" insertSQL="INSERT INTO %s (%s) VALUES (%s) " deleteSQL="DELETE FROM %s where %s" postSQL=";" DeleteSQL = "DELETE FROM %s where %s" insertAuditField="1" auditUser="System">
+					<OutField name="RELATIONSHIP_ID" type="string" value="GetSequence('InternalReferenceKey')" DeleteKey="Yes" />
 					<OutField name="SYSTEM_NAME" type="string" value="GetInputField('SYSTEM_NAME')" />
 					<OutField name="SUB_ENTITY_ID" type="string" value="GetInputField('SubEntityId')" />
-					<OutField name="MAIN_ENTITY_ID" type="int" value="GetInputField('MainEntityId')" />
+					<OutField name="MAIN_ENTITY_ID" type="string" value="GetSequence('MainEntityId')" />
 					<OutField name="RELATION_TYPE" type="string" value="GetInputField('RelationType')" />
 					<OutField name="MAIN_ENTITY_KEY" type="string" value="GetInputField('MainEntityKey')" />
 					<OutField name="SUB_ENTITY_KEY" type="string" value="GetInputField('SubEntityKey')" />
@@ -177,9 +191,9 @@
 				<InputField name="ParameterValue" type="string" position="2" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="META_VIEW_PARAM" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+				<Table name="META_VIEW_PARAM" insertSQL="INSERT INTO %s (%s) VALUES (%s) " deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
 					<OutField name="PARAMETER_NAME" type="string" value="GetInputField('ParameterName')" deleteKey="Yes"/>
-					<OutField name="META_VIEW_ID" type="string" value="GetInputField('MetaViewId')" />
+					<OutField name="META_VIEW_ID" type="string" value="GetSequence('MetaViewId')" />
 					<OutField name="PARAMETER_VALUE" type="string" value="GetInputField('ParameterValue')" />
 				</Table>
 			</OutputStructure>
@@ -188,6 +202,7 @@
 			<RowInputStructure>
 				<InputField name="Id" type="string" position="0" validationExpr="" validate="0" />
 				<InputField name="SystemName" type="string" position="1" validationExpr="" validate="0" />
+				<InputField name="InternalReferenceKey" type="string" position="0" validationExpr="" validate="0" />
 				<InputField name="ProductEntId" type="string" position="1" validationExpr="" validate="0" />
 				<InputField name="RootNode" type="string" position="2" validationExpr="" validate="0" />
 				<InputField name="ParentNode" type="string" position="2" validationExpr="" validate="0" />
@@ -198,8 +213,8 @@
 				<InputField name="DisplayOrder" type="int" position="2" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="VALUE_TREE_NODE" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
-					<OutField name="TREE_NODE_ID" type="string" value="GetInputField('Id')" deleteKey="Yes"/>
+				<Table name="VALUE_TREE_NODE" insertSQL="INSERT INTO %s (%s) VALUES (%s) " deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="TREE_NODE_ID" type="string" value="GetSequence('InternalReferenceKey')" deleteKey="Yes"/>
 					<OutField name="SYSTEM_NAME" type="string" value="GetInputField('SystemName')" />
 					<OutField name="PRODUCT_ENT_ID" type="string" value="GetInputField('ProductEntId')" />
 					<OutField name="ROOT_NODE_ID" type="string" value="GetInputField('RootNode')" />
@@ -216,29 +231,31 @@
 		<MetaNode name="MetaEntityCategory">
 			<RowInputStructure>
 				<InputField name="Id" type="string" position="0" validationExpr="" validate="0" />
+				<InputField name="InternalReferenceKey" type="string" position="0" validationExpr="" validate="0" />
 				<InputField name="EntityId" type="string" position="1" validationExpr="" validate="0" />
 				<InputField name="TreeNodeId" type="string" position="1" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="META_ENTITY_CATEGORY" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
-					<OutField name="ENT_CATEGORY_ID" type="string" value="GetInputField('Id')" deleteKey="Yes" />
-					<OutField name="META_ENT_ID" type="string" value="GetInputField('SystemName')" />
-					<OutField name="TREE_NODE_ID" type="string" value="GetInputField('ProductEntId')" />
+				<Table name="META_ENTITY_CATEGORY" insertSQL="INSERT INTO %s (%s) VALUES (%s) " deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="ENT_CATEGORY_ID" type="string" value="GetSequence('InternalReferenceKey')" deleteKey="Yes" />
+					<OutField name="META_ENT_ID" type="string" value="GetSequence('EntityId')" />
+					<OutField name="TREE_NODE_ID" type="string" value="GetSequence('TreeNodeId')" />
 				</Table>
 			</OutputStructure>
 		</MetaNode>		
 		<MetaNode name="WFProcessEntityAlloc">
 			<RowInputStructure>
 				<InputField name="Id" type="string" position="0" validationExpr="" validate="0" />
+				<InputField name="InternalReferenceKey" type="string" position="0" validationExpr="" validate="0" />
 				<InputField name="DocumentEntity" type="string" position="1" validationExpr="" validate="0" />
 				<InputField name="ProcessCode" type="string" position="1" validationExpr="" validate="0" />
 				<InputField name="TurnAroundTime" type="string" position="1" validationExpr="" validate="0" />
 				<InputField name="EscStrategyId" type="string" position="1" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="WF_PROCESS_ENTITY_ALLOC" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
-					<OutField name="PROCESS_ALLOC_ID" type="string" value="GetInputField('Id')" deleteKey="Yes" />
-					<OutField name="DOCUMENT_ENTITY" type="string" value="GetInputField('DocumentEntity')" />
+				<Table name="WF_PROCESS_ENTITY_ALLOC" insertSQL="INSERT INTO %s (%s) VALUES (%s) " deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="PROCESS_ALLOC_ID" type="string" value="GetSequence('InternalReferenceKey')" deleteKey="Yes" />
+					<OutField name="DOCUMENT_ENTITY" type="string" value="GetSequence('DocumentEntity')" />
 					<OutField name="PROCESS_CODE" type="string" value="GetInputField('ProcessCode')" />
 					<OutField name="TURN_AROUND_TIME" type="int" value="GetInputField('TurnAroundTime')" />
 					<OutField name="ESC_STRATEGY_ID" type="string" value="GetInputField('EscStrategyId')" />
@@ -253,9 +270,9 @@
 				<InputField name="SelectCriteria" type="string" position="1" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="WF_PROCESS_PARTICIPANT" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+				<Table name="WF_PROCESS_PARTICIPANT" insertSQL="INSERT INTO %s (%s) VALUES (%s) " deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
 					<OutField name="ROLE_ID" type="string" value="GetInputField('RoleId')" deleteKey="Yes" />
-					<OutField name="PROCESS_ALLOC_ID" type="string" value="GetInputField('ProcessAllocId')" deleteKey="Yes" />
+					<OutField name="PROCESS_ALLOC_ID" type="string" value="GetSequence('ProcessAllocId')" deleteKey="Yes" />
 					<OutField name="IS_SUPERVISOR" type="string" value="GetInputField('IsSupervisor')" />
 					<OutField name="CAN_CREATE" type="int" value="0" />
 					<OutField name="SELECT_CRITERIA" type="string" value="GetInputField('SelectCriteria')" />
@@ -269,10 +286,10 @@
 				<InputField name="EntityId" type="string" position="1" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="ADC_FACILITY_EFORM_TYPE_MAPPING" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
-					<OutField name="MAPPING_ID" type="string" value="GetInputField('Id')" deleteKey="Yes" />
-					<OutField name="ADC_CODE" type="string" value="GetInputField('ProcessAllocId')" />
-					<OutField name="META_ENT_ID" type="string" value="GetInputField('IsSupervisor')" />
+				<Table name="ADC_FACILITY_EFORM_TYPE_MAPPING" insertSQL="INSERT INTO %s (%s) VALUES (%s) " deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="MAPPING_ID" type="string" value="GenerateSequence('ADCFacilityEFormTypeMapping')" deleteKey="Yes" />
+					<OutField name="ADC_CODE" type="string" value="GetInputField('ADCCode')" />
+					<OutField name="META_ENT_ID" type="string" value="GetSequence('EntityId')" />
 				</Table>
 			</OutputStructure>
 		</MetaNode>	

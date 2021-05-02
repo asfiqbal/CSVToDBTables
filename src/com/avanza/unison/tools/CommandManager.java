@@ -25,19 +25,27 @@ public class CommandManager {
 	}
 
 
-	public static String Execute(Command cmdObj, HashMap<String, String> dataMap, SequenceManager seqManager) {
+	public static String Execute(Command cmdObj, HashMap<String, String> dataMap, SessionManager sessionManager) {
 		String returnValue = "";
 		String key = cmdObj.getName();
 		switch(key) {
 		case "GenerateSequence":
-			returnValue = seqManager.Generate(cmdObj.getParam());
+			returnValue = sessionManager.internalSeqManager.Generate(cmdObj.getParam());
 			dataMap.put(cmdObj.getParam(), returnValue);
 			break;
 		case "GetInputField":
-		case "GetSequence":
 			returnValue = dataMap.get(cmdObj.getParam());
 			break;
 			
+		case "GetSequence":
+			String keyValue = dataMap.get(cmdObj.getParam());
+			returnValue = sessionManager.getSessionValue(keyValue);
+			if (returnValue == null) {
+				returnValue = keyValue;
+			}
+			System.out.println("ObjParam:" + cmdObj.getParam() + " ,keyValue=" + keyValue + " ,returnValue:"+returnValue);
+			break;
+
 		case "DateTime":
 			returnValue = ExecuteDateTime(cmdObj.getParam());
 			break;

@@ -13,7 +13,7 @@ import com.avanza.unison.tools.objects.Table;
 
 public class TableManager {
 	
-	public SQLCollection Process(Table table, HashMap<String, String> dataMap, SequenceManager seqManager) {
+	public SQLCollection Process(Table table, HashMap<String, String> dataMap, SessionManager sessionManager) {
 		HashMap<String, OutField> outFieldMap = table.getFieldsMap();
 		HashMap<String, Table> outInnerTableMap = table.getTableMap();
 		String insertSql = table.getInsertSQL();
@@ -33,7 +33,7 @@ public class TableManager {
 			String value = field.getValue();
 			if (CommandManager.IsCommand(value)) {
 				Command cmdObj = Util.BreakCommand(value);
-				value = CommandManager.Execute(cmdObj, dataMap, seqManager);
+				value = CommandManager.Execute(cmdObj, dataMap, sessionManager);
 				
 			}
 			value = Util.SQLQuote(value, field.getType());
@@ -63,7 +63,7 @@ public class TableManager {
 
 		for (Map.Entry<String, Table> me : outInnerTableMap.entrySet()) {
 			Table t = (Table)me.getValue();
-			SQLCollection outSqls = Process(t, dataMap, seqManager);
+			SQLCollection outSqls = Process(t, dataMap, sessionManager);
 			sqlCollection.append(outSqls);
 	    }
 		

@@ -12,7 +12,6 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.avanza.unison.tools.RowInputFieldManager;
 import com.avanza.unison.tools.SessionManager;
 import com.avanza.unison.tools.TableManager;
 import com.avanza.unison.tools.UnisonConfigurationManager;
@@ -109,12 +108,13 @@ public class MetaNode {
 
 		UnisonConfigurationManager unisonConfigReader = inSessionManager.getUnisonConfigurationManager();
 		
+		//Here id needs to be changed with SystemName as Id will be depricated
 		if (parentNode == null) {
 			XpathExpression = "//UnisonConfiguration//" + Name;
 		}
 		else {
-			String value = parentNode.getAttributes().getNamedItem("Id").getNodeValue();
-			XpathExpression = "//UnisonConfiguration//"+parentNode.getNodeName()+"[@Id='" + value + "']//" + Name;
+			String value = parentNode.getAttributes().getNamedItem("InternalReferenceKey").getNodeValue();
+			XpathExpression = "//UnisonConfiguration//"+parentNode.getNodeName()+"[@InternalReferenceKey='" + value + "']//" + Name;
 		}
 		NodeList metaEntityDataList = unisonConfigReader.Evaluate(XpathExpression);
 		
@@ -139,7 +139,7 @@ public class MetaNode {
 				Table tableObj = (Table)me.getValue();
 				
 				TableManager tableManager = new TableManager();
-				SQLCollection tempSQL = tableManager.Process(tableObj, dataMap, inSessionManager.getInternalSeqManager());
+				SQLCollection tempSQL = tableManager.Process(tableObj, dataMap, inSessionManager);
 				outSQLCollection.append(tempSQL);
 				
 		    }
