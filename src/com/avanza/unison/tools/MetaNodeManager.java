@@ -11,10 +11,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.avanza.unison.tools.objects.InputField;
+
 import com.avanza.unison.tools.objects.MetaNode;
-import com.avanza.unison.tools.objects.OutField;
-import com.avanza.unison.tools.objects.Table;
+
+import com.avanza.unison.tools.objects.SQLCollection;
+
 import com.sun.media.sound.InvalidFormatException;
 
 
@@ -40,7 +41,6 @@ public class MetaNodeManager {
 			String name = element.getAttribute("name");
 			metaObj.setName(name);
 			metaNodeMap.put(name, metaObj);
-			System.out.println("Element: " + element.getTagName() + " Attrib:" + name);
 			metaObj.LoadAllDependencies(element);
 		}
 
@@ -57,12 +57,12 @@ public class MetaNodeManager {
 	
 	public void Process(SessionManager inSessionManager, String inFileName) throws InvalidFormatException, XPathExpressionException {
 		HashMap<String, String> dataMap = null;
-		ArrayList<String> sqlSet = new ArrayList<String>();
+		ArrayList<SQLCollection> sqlSet = new ArrayList<SQLCollection>();
 	
 		for(Map.Entry<String, MetaNode> entry: metaNodeMap.entrySet()) {
 
 			MetaNode metaNode = entry.getValue();
-			String sql = metaNode.Process(inSessionManager, null);
+			SQLCollection sql = metaNode.Process(inSessionManager, null);
 			sqlSet.add(sql);
 		}
 		

@@ -13,8 +13,8 @@
 			<InputField name="MajorType" type="string" position="4" validationExpr="" validate="0" />
 		</RowInputStructure>
 		<OutputStructure>
-			<Table name="META_ENTITY" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" DeleteSQL="DELETE FROM %s where %s=%s" insertAuditField="1" auditUser="System">
-				<OutField name="META_ENTITY_ID" type="string" value="GetInputField('Id')" DeleteKey="Yes" />
+			<Table name="META_ENTITY" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+				<OutField name="META_ENTITY_ID" type="string" value="GetInputField('Id')" deleteKey="Yes" />
 				<OutField name="SYSTEM_NAME" type="string" value="GetInputField('SystemName')" />
 				<OutField name="PARENT_ENTITY" type="string" value="GetInputField('ParentEntityId')" />
 				<OutField name="ENTITY_NAME" type="string" value="GetInputField('EntityUserFriendlyName')" />
@@ -42,8 +42,8 @@
 				<InputField name="TemplateEnabled" type="string" position="7" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="META_ENTITY_ATTRIB" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
-					<OutField name="ATTRIBUTE_ID" type="string" value="GetInputField('Id')" />
+				<Table name="META_ENTITY_ATTRIB" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="ATTRIBUTE_ID" type="string" value="GetInputField('Id')" deleteKey="Yes" />
 					<OutField name="SYSTEM_NAME" type="string" value="GetInputField('SystemName')" />
 					<OutField name="META_ENT_ID" type="string" value="GetInputField('EntityId')" />
 					<OutField name="ATTRIBUTE_NAME" type="string" value="GetInputField('AttributeName')" />
@@ -76,8 +76,8 @@
 				<InputField name="SelectCriteria" type="string" position="7" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="META_VIEW" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
-					<OutField name="META_VIEW_ID" type="string" value="GetInputField('Id')" />
+				<Table name="META_VIEW" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="META_VIEW_ID" type="string" value="GetInputField('Id')" deleteKey="Yes" />
 					<OutField name="VIEW_NAME_PRM" type="string" value="GetInputField('ViewNamePrm')" />
 					<OutField name="SYSTEM_NAME" type="string" value="GetInputField('SystemName')" />
 					<OutField name="VIEW_NAME_SEC" type="string" value="GetInputField('ViewNamePrm')" />
@@ -112,8 +112,8 @@
 				<InputField name="RenderAsPopup" type="int" position="7" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="META_VIEW_ATTRIB" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
-					<OutField name="VIEW_ATTRIB_ID" type="string" value="GetInputField('Id')" />
+				<Table name="META_VIEW_ATTRIB" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="VIEW_ATTRIB_ID" type="string" value="GetInputField('Id')" deleteKey="Yes" />
 					<OutField name="META_VIEW_ID" type="string" value="GetInputField('MetaViewId')" />
 					<OutField name="ATTRIBUTE_ID" type="string" value="GetInputField('AttributeId')" />
 					<OutField name="SYSTEM_NAME" type="string" value="GetInputField('SystemName')" />
@@ -139,8 +139,8 @@
 				<InputField name="RelationshipType" type="string" position="4" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="META_VIEW_RELATIONSHIP" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
-					<OutField name="RELATION_ID" type="string" value="GetInputField('Id')" />
+				<Table name="META_VIEW_RELATIONSHIP" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="RELATION_ID" type="string" value="GetInputField('Id')" deleteKey="Yes" />
 					<OutField name="PARENT_VIEW_ID" type="string" value="GetInputField('ParentViewId')" />
 					<OutField name="CHILD_VIEW_ID" type="string" value="GetInputField('ChildViewId')" />
 					<OutField name="CHILD_ORDER_IN_PARENT" type="int" value="GetInputField('ChildOrderInParent')" />
@@ -159,7 +159,7 @@
 				<InputField name="SubEntityKey" type="string" position="4" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="META_ENTITY_RELATIONSHIP" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" DeleteSQL = "DELETE FROM %s where %s=%s" insertAuditField="1" auditUser="System">
+				<Table name="META_ENTITY_RELATIONSHIP" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" DeleteSQL = "DELETE FROM %s where %s" insertAuditField="1" auditUser="System">
 					<OutField name="RELATIONSHIP_ID" type="string" value="GetInputField('Id')" DeleteKey="Yes" />
 					<OutField name="SYSTEM_NAME" type="string" value="GetInputField('SYSTEM_NAME')" />
 					<OutField name="SUB_ENTITY_ID" type="string" value="GetInputField('SubEntityId')" />
@@ -177,8 +177,8 @@
 				<InputField name="ParameterValue" type="string" position="2" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="META_VIEW_PARAM" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
-					<OutField name="PARAMETER_NAME" type="string" value="GetInputField('ParameterName')" />
+				<Table name="META_VIEW_PARAM" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="PARAMETER_NAME" type="string" value="GetInputField('ParameterName')" deleteKey="Yes"/>
 					<OutField name="META_VIEW_ID" type="string" value="GetInputField('MetaViewId')" />
 					<OutField name="PARAMETER_VALUE" type="string" value="GetInputField('ParameterValue')" />
 				</Table>
@@ -198,8 +198,8 @@
 				<InputField name="DisplayOrder" type="int" position="2" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="VALUE_TREE_NODE" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
-					<OutField name="TREE_NODE_ID" type="string" value="GetInputField('Id')" />
+				<Table name="VALUE_TREE_NODE" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="TREE_NODE_ID" type="string" value="GetInputField('Id')" deleteKey="Yes"/>
 					<OutField name="SYSTEM_NAME" type="string" value="GetInputField('SystemName')" />
 					<OutField name="PRODUCT_ENT_ID" type="string" value="GetInputField('ProductEntId')" />
 					<OutField name="ROOT_NODE_ID" type="string" value="GetInputField('RootNode')" />
@@ -220,8 +220,8 @@
 				<InputField name="TreeNodeId" type="string" position="1" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="META_ENTITY_CATEGORY" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
-					<OutField name="ENT_CATEGORY_ID" type="string" value="GetInputField('Id')" />
+				<Table name="META_ENTITY_CATEGORY" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="ENT_CATEGORY_ID" type="string" value="GetInputField('Id')" deleteKey="Yes" />
 					<OutField name="META_ENT_ID" type="string" value="GetInputField('SystemName')" />
 					<OutField name="TREE_NODE_ID" type="string" value="GetInputField('ProductEntId')" />
 				</Table>
@@ -236,8 +236,8 @@
 				<InputField name="EscStrategyId" type="string" position="1" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="WF_PROCESS_ENTITY_ALLOC" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
-					<OutField name="PROCESS_ALLOC_ID" type="string" value="GetInputField('Id')" />
+				<Table name="WF_PROCESS_ENTITY_ALLOC" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="PROCESS_ALLOC_ID" type="string" value="GetInputField('Id')" deleteKey="Yes" />
 					<OutField name="DOCUMENT_ENTITY" type="string" value="GetInputField('DocumentEntity')" />
 					<OutField name="PROCESS_CODE" type="string" value="GetInputField('ProcessCode')" />
 					<OutField name="TURN_AROUND_TIME" type="int" value="GetInputField('TurnAroundTime')" />
@@ -253,9 +253,9 @@
 				<InputField name="SelectCriteria" type="string" position="1" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="WF_PROCESS_PARTICIPANT" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
-					<OutField name="ROLE_ID" type="string" value="GetInputField('RoleId')" />
-					<OutField name="PROCESS_ALLOC_ID" type="string" value="GetInputField('ProcessAllocId')" />
+				<Table name="WF_PROCESS_PARTICIPANT" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="ROLE_ID" type="string" value="GetInputField('RoleId')" deleteKey="Yes" />
+					<OutField name="PROCESS_ALLOC_ID" type="string" value="GetInputField('ProcessAllocId')" deleteKey="Yes" />
 					<OutField name="IS_SUPERVISOR" type="string" value="GetInputField('IsSupervisor')" />
 					<OutField name="CAN_CREATE" type="int" value="0" />
 					<OutField name="SELECT_CRITERIA" type="string" value="GetInputField('SelectCriteria')" />
@@ -269,8 +269,8 @@
 				<InputField name="EntityId" type="string" position="1" validationExpr="" validate="0" />
 			</RowInputStructure>
 			<OutputStructure>
-				<Table name="ADC_FACILITY_EFORM_TYPE_MAPPING" preSQL="INSERT INTO %s (%s) VALUES (%s) )" postSQL=";" insertAuditField="1" auditUser="System">
-					<OutField name="MAPPING_ID" type="string" value="GetInputField('RoleId')" />
+				<Table name="ADC_FACILITY_EFORM_TYPE_MAPPING" insertSQL="INSERT INTO %s (%s) VALUES (%s) )" deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
+					<OutField name="MAPPING_ID" type="string" value="GetInputField('Id')" deleteKey="Yes" />
 					<OutField name="ADC_CODE" type="string" value="GetInputField('ProcessAllocId')" />
 					<OutField name="META_ENT_ID" type="string" value="GetInputField('IsSupervisor')" />
 				</Table>

@@ -8,19 +8,24 @@ import java.util.Map;
 
 import com.avanza.unison.tools.objects.Command;
 import com.avanza.unison.tools.objects.OutField;
+import com.avanza.unison.tools.objects.SQLCollection;
 import com.avanza.unison.tools.objects.Table;
 
 public class TableManager {
 	
-	public String Process(Table table, HashMap<String, String> dataMap, SequenceManager seqManager) {
+	public SQLCollection Process(Table table, HashMap<String, String> dataMap, SequenceManager seqManager) {
 		HashMap<String, OutField> outFieldMap = table.getFieldsMap();
 		HashMap<String, Table> outInnerTableMap = table.getTableMap();
-		String sql = table.getPreSQL();
+		String insertSql = table.getInsertSQL();
+		String deleteSqlTemplate = table.getDeleteSQL();
 		String sqlColumnNames = "";
 		String sqlValues = "";
+
 		
 		List<String> columnNames = new ArrayList<String>();
 		List<String> values = new ArrayList<String>();
+		List<String> deleteWhereConditions = new ArrayList<String>();
+
 					
 		for (Map.Entry<String, OutField> me : outFieldMap.entrySet()) {
 			OutField field = (OutField)me.getValue();
@@ -31,26 +36,39 @@ public class TableManager {
 				value = CommandManager.Execute(cmdObj, dataMap, seqManager);
 				
 			}
+			value = Util.SQLQuote(value, field.getType());
 			
-			values.add(Util.SQLQuote(value, field.getType()));
+			if (field.getDeleteKey().equalsIgnoreCase("Yes")) {
+				String condition = field.getName() + "=" + value;
+				deleteWhereConditions.add(condition);
+			}
+			
+			values.add(value);
 	    }
 		
 		sqlColumnNames = String.join(",", columnNames);
 		sqlValues = String.join(",", values);
+		String sqlFinalConditions = String.join(" AND ", deleteWhereConditions);
 		
-		String outSql = String.format(sql, table.getName(), sqlColumnNames, sqlValues);
+		String outSql = String.format(insertSql, table.getName(), sqlColumnNames, sqlValues);
+		String deleteSQL = String.format(deleteSqlTemplate, table.getName(), sqlFinalConditions);
 		StringBuilder sb = new StringBuilder();
 		sb.append(outSql);
 		sb.append(table.getPostSQL());
 		sb.append("\n");
+		
+		deleteSQL = deleteSQL + table.getPostSQL() + "\n";
+
+		SQLCollection sqlCollection = new SQLCollection(sb.toString(), deleteSQL);
 
 		for (Map.Entry<String, Table> me : outInnerTableMap.entrySet()) {
 			Table t = (Table)me.getValue();
-			outSql = Process(t, dataMap, seqManager);
-			sb.append(outSql);
+			SQLCollection outSqls = Process(t, dataMap, seqManager);
+			sqlCollection.append(outSqls);
 	    }
 		
-		return sb.toString();
+		
+		return sqlCollection;
 	}
 
 }

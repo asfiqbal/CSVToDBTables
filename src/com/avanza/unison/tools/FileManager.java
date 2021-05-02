@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;  
+import java.util.List;
+
+import com.avanza.unison.tools.objects.SQLCollection;  
 
 public class FileManager {
 
@@ -47,20 +49,26 @@ public class FileManager {
 		
 	}
 	
-	public static void WriteListToFile(List<String> sqlList, String filePath) {
+	public static void WriteListToFile(List<SQLCollection> sqlList, String filePath) {
 		try {
 			
 
-			File file = new File(filePath);
+			File insertFile = new File(filePath);
+			File deleteFile = new File(filePath+".del");
 
-			FileWriter writer = new FileWriter(file);
+			FileWriter writer = new FileWriter(insertFile);
+			FileWriter writerDeleteFile = new FileWriter(deleteFile);
 
-	        for (String record: sqlList) {
-	            writer.write(record);
+	        for (SQLCollection record: sqlList) {
+	            writer.write(record.getInsertSQL());
 	            writer.write("\n");
+	            writerDeleteFile.write(record.getDeleteSQL());
+	            writerDeleteFile.write("\n");
 	        }
 	        writer.flush();
 	        writer.close();
+	        writerDeleteFile.flush();
+	        writerDeleteFile.close();
 
 		}
 		catch(Exception e) {

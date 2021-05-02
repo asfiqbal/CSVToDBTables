@@ -6,8 +6,9 @@ import java.util.Map;
 
 public class Table {
 	String Name;
-	String PreSQL;
+	String InsertSQL;
 	String PostSQL;
+	String DeleteSQL;
 	String insertAuditField;
 	String auditUser;
 	
@@ -40,13 +41,22 @@ public class Table {
 		Name = name;
 	}
 	
-	public String getPreSQL() {
-		return PreSQL;
+	public String getInsertSQL() {
+		return InsertSQL;
 	}
 	
-	public void setPreSQL(String preSQL) {
-		PreSQL = preSQL;
+	public void setInsertSQL(String preSQL) {
+		InsertSQL = preSQL;
 	}
+	
+	public String getDeleteSQL() {
+		return DeleteSQL;
+	}
+	
+	public void setDeleteSQL(String preSQL) {
+		DeleteSQL = preSQL;
+	}
+	
 	
 	public String getPostSQL() {
 		return PostSQL;

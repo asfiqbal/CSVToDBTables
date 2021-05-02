@@ -73,7 +73,7 @@ public class MetaNode {
 		
 		for (Map.Entry<String, Table> me : tableMap.entrySet()) {
 			Table field = (Table)me.getValue();
-			System.out.println("Name: "+field.getName()+", PostSQL: "+field.getPostSQL()+", PreSQL: "+field.getPreSQL());
+			System.out.println("Name: "+field.getName()+", PostSQL: "+field.getPostSQL()+", PreSQL: "+field.getInsertSQL());
 			
 			field.Traverse();
 	    }
@@ -101,10 +101,11 @@ public class MetaNode {
 
 	}
 	
-	public String Process(SessionManager inSessionManager, Node parentNode) throws XPathExpressionException, InvalidFormatException	{
+	public SQLCollection Process(SessionManager inSessionManager, Node parentNode) throws XPathExpressionException, InvalidFormatException	{
 		String outString = "";
 		String XpathExpression ="";
 		StringBuilder sqlStringBuilder = new StringBuilder();
+		SQLCollection outSQLCollection = new SQLCollection();
 
 		UnisonConfigurationManager unisonConfigReader = inSessionManager.getUnisonConfigurationManager();
 		
@@ -138,20 +139,20 @@ public class MetaNode {
 				Table tableObj = (Table)me.getValue();
 				
 				TableManager tableManager = new TableManager();
-				String tempSQL = tableManager.Process(tableObj, dataMap, inSessionManager.getInternalSeqManager());
-				sqlStringBuilder.append(tempSQL);
+				SQLCollection tempSQL = tableManager.Process(tableObj, dataMap, inSessionManager.getInternalSeqManager());
+				outSQLCollection.append(tempSQL);
 				
 		    }
 		
 			for (Map.Entry<String, MetaNode> me : innerMetaNodeMap.entrySet()) {
 				MetaNode childMetaNode = (MetaNode)me.getValue();
 				//childMetaNode.Traverse();
-				String childSQL = childMetaNode.Process(inSessionManager, singleMetaEntity);
-				sqlStringBuilder.append(childSQL);
+				SQLCollection childSQL = childMetaNode.Process(inSessionManager, singleMetaEntity);
+				outSQLCollection.append(childSQL);
 		    }
 		
 		}
-		return sqlStringBuilder.toString();
+		return outSQLCollection;
 	}
 
 
@@ -170,8 +171,9 @@ public class MetaNode {
 			Element element = (Element)node;
 			String tableName = element.getAttribute("name");
 			tableObj.setName(tableName);
-			tableObj.setPreSQL(element.getAttribute("preSQL"));
+			tableObj.setInsertSQL(element.getAttribute("insertSQL"));
 			tableObj.setPostSQL(element.getAttribute("postSQL"));
+			tableObj.setDeleteSQL(element.getAttribute("deleteSQL"));
 			
 			String insertAuditField = element.getAttribute("insertAuditField");
 			tableObj.setInsertAuditField(insertAuditField);
@@ -190,6 +192,7 @@ public class MetaNode {
 				outField.setName(outFieldName);
 				outField.setType(innerElement.getAttribute("type"));
 				outField.setValue(innerElement.getAttribute("value"));
+				outField.setDeleteKey(innerElement.getAttribute("deleteKey"));
 				tableObj.putOutField(outFieldName, outField);
 			}
 			
@@ -270,6 +273,7 @@ public class MetaNode {
 		outField.setName(outFieldName);
 		outField.setType("String");
 		outField.setValue(tableObj.getAuditUser());
+		outField.setDeleteKey("");
 		tableObj.putOutField(outFieldName, outField);
 		
 		outField = new OutField();
@@ -277,6 +281,7 @@ public class MetaNode {
 		outField.setName(outFieldName);
 		outField.setType("DateTime");
 		outField.setValue("DateTime('Now')");
+		outField.setDeleteKey("");
 		tableObj.putOutField(outFieldName, outField);
 		
 		outField = new OutField();
@@ -284,6 +289,7 @@ public class MetaNode {
 		outField.setName(outFieldName);
 		outField.setType("String");
 		outField.setValue(tableObj.getAuditUser());
+		outField.setDeleteKey("");
 		tableObj.putOutField(outFieldName, outField);
 
 		outField = new OutField();
@@ -291,6 +297,7 @@ public class MetaNode {
 		outField.setName(outFieldName);
 		outField.setType("DateTime");
 		outField.setValue("DateTime('Now')");
+		outField.setDeleteKey("");
 		tableObj.putOutField(outFieldName, outField);
 	}
 

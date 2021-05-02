@@ -12,6 +12,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.avanza.unison.tools.objects.OutField;
+import com.avanza.unison.tools.objects.SQLCollection;
 import com.avanza.unison.tools.objects.Table;
 
 
@@ -32,7 +33,8 @@ public class OutputStructureManager {
 			Element element = (Element)node;
 			String mapName = element.getAttribute("name");
 			tableObj.setName(mapName);
-			tableObj.setPreSQL(element.getAttribute("preSQL"));
+			tableObj.setInsertSQL(element.getAttribute("insertSQL"));
+			tableObj.setInsertSQL(element.getAttribute("deleteSQL"));
 			tableObj.setPostSQL(element.getAttribute("postSQL"));
 			
 			String insertAuditField = element.getAttribute("insertAuditField");
@@ -113,7 +115,7 @@ public class OutputStructureManager {
 	
 	public void Process(SessionManager sessionManager, String filePath) {
 		HashMap<String, String> dataMap = null;
-		ArrayList<String> sqlSet = new ArrayList<String>();
+		ArrayList<SQLCollection> sqlSet = new ArrayList<SQLCollection>();
 		TableManager tableManager = new TableManager();
 		
 		while ((dataMap = sessionManager.Pop()) != null) {
@@ -121,10 +123,9 @@ public class OutputStructureManager {
 			for(Map.Entry<String, Table> entry: tableMap.entrySet()) {
 
 				Table tableObj = entry.getValue();
-				String sql = tableManager.Process(tableObj, dataMap, sessionManager.getInternalSeqManager());
-				sqlSet.add(sql);
+				SQLCollection sqls = tableManager.Process(tableObj, dataMap, sessionManager.getInternalSeqManager());
+				sqlSet.add(sqls);
 			}
-			sqlSet.add("\n");
 		}
 		
 		FileManager.WriteListToFile(sqlSet, filePath);

@@ -5,12 +5,19 @@ public class OutField {
 	String name;
 	String type;
 	String value;
+	String deleteKey;
 	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getDeleteKey() {
+		return deleteKey;
+	}
+	public void setDeleteKey(String key) {
+		this.deleteKey = key;
 	}
 	public String getType() {
 		return type;

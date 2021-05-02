@@ -55,7 +55,7 @@ public class Root {
 			System.out.println("Initiating MetaNodes");
 			MetaNodeManager metaNodesManager = new MetaNodeManager();
 			metaNodesManager.Load(MetaStructureManager.LoadElement());
-			metaNodesManager.Traverse();
+			//metaNodesManager.Traverse();
 			System.out.println("MetaNodes successfull initialized");
 
 			System.out.println("Reading "+args[0]+ "File");
