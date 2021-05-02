@@ -66,4 +66,17 @@ public class SessionManager {
 		}
 	}
 
+	public void LoadGlobalKeys(NodeList loadGlobalKeys) {
+		
+		for (int i = 0; i < loadGlobalKeys.getLength(); i++) {
+			Node node = loadGlobalKeys.item(i);
+			Element element = (Element)node;
+			String tagName = element.getTagName();
+			String businessValue = element.getAttribute("businessValue");
+			String internalValue = element.getAttribute("internalValue");
+			System.out.println("tagName:" + tagName + " ,businessValue:" + businessValue + ", internalValue:" + internalValue );
+			putSessionKey(tagName+"|"+businessValue, internalValue);
+		}
+	}
+
 }

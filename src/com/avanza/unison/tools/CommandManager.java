@@ -28,6 +28,7 @@ public class CommandManager {
 	public static String Execute(Command cmdObj, HashMap<String, String> dataMap, SessionManager sessionManager) {
 		String returnValue = "";
 		String key = cmdObj.getName();
+		String keyValue = "";
 		switch(key) {
 		case "GenerateSequence":
 			returnValue = sessionManager.internalSeqManager.Generate(cmdObj.getParam());
@@ -38,8 +39,19 @@ public class CommandManager {
 			break;
 			
 		case "GetSequence":
-			String keyValue = dataMap.get(cmdObj.getParam());
+			keyValue = dataMap.get(cmdObj.getParam());
 			returnValue = sessionManager.getSessionValue(keyValue);
+			if (returnValue == null) {
+				returnValue = keyValue;
+			}
+			System.out.println("ObjParam:" + cmdObj.getParam() + " ,keyValue=" + keyValue + " ,returnValue:"+returnValue);
+			break;
+			
+		case "GetFromGlobalStore":
+			String paramName = cmdObj.getParam();
+			keyValue = dataMap.get(paramName);
+			
+			returnValue = sessionManager.getSessionValue(paramName + "|" + keyValue);
 			if (returnValue == null) {
 				returnValue = keyValue;
 			}

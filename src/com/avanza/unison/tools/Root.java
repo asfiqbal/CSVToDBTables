@@ -16,35 +16,17 @@ public class Root {
 	public static void ShowLicense() {
 
 		System.out.println("Unison Tools Set version 1.0");
-		System.out.println("Perceived And Developed by Syed Asif Iqbal");
+		System.out.println("Perceived And Developed by Asif Iqbal");
 		System.out.println("");
 	}
-	
-	
-//	public static void ProcessInputFile(String fileName, SessionManager sessionManager, RowInputFieldManager rowInputFieldManager) {
-//
-//		FileManager fileManager = new FileManager(fileName);
-//		String[] fileContent = null;
-//		
-//				
-//		while ((fileContent = fileManager.ReadLine()) != null) {
-//			try {
-//				HashMap<String, String> rowMap = rowInputFieldManager.Process(fileContent);
-//				sessionManager.Push(rowMap);
-//
-//			} catch (InvalidFormatException e) {
-//				e.printStackTrace();
-//			}
-//			
-//		}
-//		
-//	}
+
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		try {
+			ShowLicense();
 			System.out.println("Start Loading Meta Structure Configuration");
 			MetaStructureManager.Load();
 			SequenceManager sequenceManager = new SequenceManager();
@@ -63,6 +45,7 @@ public class Root {
 			UnisonConfigurationManager configReader = new UnisonConfigurationManager(args[0]);
 			SessionManager sessionManager = new SessionManager(sequenceManager, configReader);
 			sessionManager.GenerateIds();
+			sessionManager.LoadGlobalKeys(MetaStructureManager.LoadGlobalKeys());
 			String outFileName = args[1];
 
 			System.out.println("Initiating SQL Generation Process ");

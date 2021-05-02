@@ -25,7 +25,7 @@ public final class MetaStructureManager {
 		NodeList nodeList = null;
 		try {
 	
-			String expression = "/Unison/sequence/Generate";
+			String expression = "/Unison/Sequence/Generate";
 			nodeList = XPathManager.Evaluate(expression);
 		}
 		catch(Exception e)
@@ -100,6 +100,21 @@ public final class MetaStructureManager {
 		
 	}
 	
+	public static NodeList LoadGlobalKeys()
+	{
+		NodeList nodeList = null;
+		try {
+	
+			String expression = "//GlobalKeys/*";
+			nodeList = XPathManager.Evaluate(expression);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return nodeList;
+		
+	}
 	
 
 }

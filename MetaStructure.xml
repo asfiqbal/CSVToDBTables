@@ -1,5 +1,5 @@
 <Unison root="Unison.Document.EForm" version="2.8">
-	<sequence>
+	<Sequence>
 		<Generate name="MetaEntity" template="E-9999999999" increment="1" start="2201000149" />
 		<Generate name="Attrib" template="A-999999999999" increment="1" start="220100014901" />
 		<Generate name="View" template="V-999999999999" increment="1" start="220100014901" />
@@ -10,7 +10,10 @@
 		<Generate name="MetaEntityCategory" template="EC-999999999999" increment="1" start="220100014901" />
 		<Generate name="WFProcessEntityAlloc" template="PEA-999999999999" increment="1" start="220100014901" />
 		<Generate name="ADCFacilityEFormTypeMapping" template="9999999" increment="1" start="220100014901" />
-	</sequence>
+	</Sequence>
+	<GlobalKeys>
+		<ParentEntityId businessValue="Unison.Document.EForm" internalValue="2000000149" />
+	</GlobalKeys>
 	<MetaNode name="MetaEntity">
 		<RowInputStructure>
 			<InputField name="Id" type="string" position="0" validationExpr="" validate="0" />
@@ -25,7 +28,7 @@
 			<Table name="META_ENTITY" insertSQL="INSERT INTO %s (%s) VALUES (%s) " deleteSQL="DELETE FROM %s where %s" postSQL=";" insertAuditField="1" auditUser="System">
 				<OutField name="META_ENTITY_ID" type="string" value="GetSequence('InternalReferenceKey')" deleteKey="Yes" />
 				<OutField name="SYSTEM_NAME" type="string" value="GetInputField('SystemName')" />
-				<OutField name="PARENT_ENTITY" type="string" value="GetInputField('ParentEntityId')" />
+				<OutField name="PARENT_ENTITY" type="string" value="GetFromGlobalStore('ParentEntityId')" />
 				<OutField name="ENTITY_NAME" type="string" value="GetInputField('EntityUserFriendlyName')" />
 				<OutField name="TABLE_NAME" type="string" value="GetInputField('TableName')" />
 				<OutField name="IS_ABSTRACT" type="int" value="0" />
